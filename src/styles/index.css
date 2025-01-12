@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.section-padding-x {
+    @apply px-6 sm:px-8 md:px-12 lg:px-16 xl:px-20;
+}
+
+.title-font-size {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+}
+
+.sub-title-font-size {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+}
+
+.product-title-font-size {
+    @apply text-lg md:text-xl lg:text-2xl;
+}
+
+.card-title-font-size {
+    @apply text-base sm:text-lg lg:text-xl;
+}
+
+.card-description-font-size {
+    @apply text-xs md:text-sm;
+}
+
+.card-location-font-size {
+    @apply text-xs;
+}
+
+.big-font-size {
+    @apply text-xl md:text-2xl lg:text-3xl;
+}
+
+.normal-font-size {
+    @apply text-sm sm:text-base;
+}
+
+.small-font-size {
+    @apply text-sm lg:text-base;
+}
+
+.extra-small-font-size {
+    @apply text-xs lg:text-sm;
+}
+
+.file-preview {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+}
+
+.preview-image {
+    width: 196px;
+    height: 128px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.remove-button {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+}
