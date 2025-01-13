@@ -1,5 +1,5 @@
 import { posts } from "../../data/posts";
-import Post from "../../components/Post";
+import Post from "../../components/Post/PostsList";
 
 export default function Home() {
   return (

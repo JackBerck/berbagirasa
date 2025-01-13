@@ -12,7 +12,7 @@ export default function PostCard({ post }) {
       <a href={`/post/${post.id}`}>
         <img
           className="object-cover w-full h-48 rounded-lg mb-2"
-          src={post.image[0]}
+          src={post.images[0]}
           alt={`${post.title} Image`}
         />
       </a>

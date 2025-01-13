@@ -1,4 +1,4 @@
-import PostCard from "../Card/PostCard";
+import PostCard from "../../Card/PostCard";
 
 export default function PostBody({ posts }) {
   return (

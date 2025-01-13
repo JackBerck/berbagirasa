@@ -1,5 +1,5 @@
-import Authentication from ".";
-import RegisterForm from "./Form/RegisterForm";
+import Authentication from "../../components/Authentication";
+import RegisterForm from "../../components/Authentication/Form/RegisterForm";
 
 export default function Register() {
   return (
