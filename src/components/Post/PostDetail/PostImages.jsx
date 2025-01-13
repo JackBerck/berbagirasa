@@ -24,7 +24,7 @@ export default function PostImages({ title, images }) {
       {images.map((image, index) => (
         <SwiperSlide
           key={index}
-          className="w-full h-full !flex !justify-center !items-center relative bg-no-repeat bg-cover bg-center"
+          className="w-full h-full !flex !justify-center !items-center relative bg-no-repeat bg-cover bg-center cursor-pointer"
           style={{ 
             backgroundImage: `url(${image})`,
            }}

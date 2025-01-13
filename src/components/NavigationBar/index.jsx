@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import NavigationLink from "./NavigationLink";
 import { navigationRoutes } from "../../data/routes";
 
@@ -15,12 +16,12 @@ export default function NavigationBar() {
       className={`section-padding-x fixed top-0 w-full z-[998] text-dark-base normal-font-size transition-all duration-300 bg-light-base shadow-md`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto xl:px-0 py-4">
-        <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="/favicon.webp" className="w-10" alt="BerbagiRasa Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             <span className="text-green-base">Berbagi</span><span className="text-blue-base">Rasa</span>
           </span>
-        </a>
+        </Link>
         <button
           type="button"
           className="lg:hidden text-dark-base relative z-[999] focus:outline-none"
