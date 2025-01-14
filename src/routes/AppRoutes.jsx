@@ -6,6 +6,8 @@ import Register from "../pages/Authentication/Register";
 import Login from "../pages/Authentication/Login";
 import PostDetail from "../components/Post/PostDetail";
 import About from "../pages/About";
+import Contact from "../pages/Contact";
+import Donation from "../pages/Donation";
 
 function AppRoutes() {
   return (
@@ -17,6 +19,9 @@ function AppRoutes() {
           <Route path="/daftar" element={<RegisterWrapper />} />
           <Route path="/post/:id" element={<PostDetailWrapper />} />
           <Route path="/tentang-kami" element={<AboutUsWrapper />} />
+          <Route path="/kontak" element={<ContactWrapper />} />
+          <Route path="/donasi" element={<DonationWrapper />} />
+          <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Layout>
     </Router>
@@ -54,6 +59,20 @@ function AboutUsWrapper() {
     document.title = "Tentang Kami | BerbagiRasa";
   }, []);
   return <About/>;
+}
+
+function ContactWrapper() {
+  useEffect(() => {
+    document.title = "Kontak | BerbagiRasa";
+  }, []);
+  return <Contact/>;
+}
+
+function DonationWrapper() {
+  useEffect(() => {
+    document.title = "Donasi | BerbagiRasa";
+  }, []);
+  return <Donation/>;
 }
 
 export default AppRoutes;

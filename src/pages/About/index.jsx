@@ -12,7 +12,7 @@ export default function About() {
       <AboutPersuasive />
       <AboutWhatWeDo />
       <AboutInvite />
-        <AboutComments />
+      <AboutComments />
     </main>
   );
 }
