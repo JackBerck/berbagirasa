@@ -15,10 +15,10 @@ const navigationRoutes = [
     title: "Donasi",
     path: "/donasi",
   },
-  {
+  /* {
     title: "Komunitas",
     path: "/komunitas",
-  },
+  }, */
   {
     title: "Masuk",
     path: "/masuk",

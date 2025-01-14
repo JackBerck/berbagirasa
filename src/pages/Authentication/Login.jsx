@@ -7,7 +7,7 @@ export default function Login() {
       id="login"
       sideImage="/img/backgrounds/charity.jpg"
       direction="right"
-      addClass="pb-24 pt-36"
+      // addClass="pb-24 pt-36"
     >
       <LoginForm />
     </Authentication>
