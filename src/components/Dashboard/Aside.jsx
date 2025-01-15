@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function () {
   const [open, setOpen] = useState(false);
@@ -27,24 +28,24 @@ export default function () {
       >
         <div className="sticky flex flex-col gap-2 text-sm">
           <h1 className="pl-3 title-font-size font-semibold">Dasbor</h1>
-          <a
-            href="/dashboard/profil"
-            className="flex items-center px-3 py-2.5 font-semibold normal-font-size "
+          <Link
+            to="/dasbor"
+            className="flex items-center px-3 py-2.5 font-medium normal-font-size "
           >
             Pengaturan Akun
-          </a>
-          <a
-            href="/profile/manage-posts"
-            className="flex items-center px-3 py-2.5 font-semibold normal-font-size "
+          </Link>
+          <Link
+            to="/dasbor/kelola-postingan"
+            className="flex items-center px-3 py-2.5 font-medium normal-font-size "
           >
             Kelola Postingan
-          </a>
-          <a
-            href="/logout"
-            className="flex items-center px-3 py-2.5 font-semibold normal-font-size bg-red-600 text-light-base rounded-lg"
+          </Link>
+          <Link
+            to="/keluar"
+            className="flex items-center px-3 py-2.5 font-medium normal-font-size bg-red-600 text-light-base rounded-lg"
           >
             Keluar
-          </a>
+          </Link>
         </div>
       </aside>
     </>

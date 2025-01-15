@@ -14,7 +14,8 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Donation from "../pages/Donation";
 import AddPost from "../pages/Post/AddPost";
-import DashboardProfile from "../pages/Dashboard/index";
+import DashboardProfile from "../pages/Dashboard";
+import DashboardManagePost from "../pages/Dashboard/ManagePost";
 
 function AppRoutes() {
   return (
@@ -32,7 +33,11 @@ function AppRoutes() {
             path="/postingan/tambah-postingan"
             element={<AddPostWrapper />}
           />
-          <Route path="/dashboard/profil" element={<DashboardProfileWrapper />} />
+          <Route path="/dasbor" element={<DashboardProfileWrapper />} />
+          <Route
+            path="/dasbor/kelola-postingan"
+            element={<DashboardManagePostWrapper />}
+          />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Layout>
@@ -98,7 +103,14 @@ function DashboardProfileWrapper() {
   useEffect(() => {
     document.title = "Profil | BerbagiRasa";
   }, []);
-  return <DashboardProfile/>
+  return <DashboardProfile />;
+}
+
+function DashboardManagePostWrapper() {
+  useEffect(() => {
+    document.title = "Kelola Postingan | BerbagiRasa";
+  }, []);
+  return <DashboardManagePost />;
 }
 
 export default AppRoutes;

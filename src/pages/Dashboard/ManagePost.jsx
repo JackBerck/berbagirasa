@@ -1,17 +1,17 @@
 import Aside from "../../components/Dashboard/Aside";
-import ManageProfile from "../../components/Dashboard/ManageProfile";
+import ManagePost from "../../components/Dashboard/ManagePost";
 
-export default function DashboardProfile() {
+export default function DashboardManagePost() {
   return (
     <main>
       <section
-        id="dashboard-profile"
+        id="dashboard-manage-post"
         className="section-padding-x pt-24 pb-16 text-dark-base"
       >
         <div className="container max-w-screen-xl">
           <div className="flex flex-col md:flex-row gap-8">
             <Aside />
-            <ManageProfile />
+            <ManagePost />
           </div>
         </div>
       </section>

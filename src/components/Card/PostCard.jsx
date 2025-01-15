@@ -1,12 +1,6 @@
-export default function PostCard({ post }) {
-  const truncateText = (text, wordLimit) => {
-    const words = text.split(" ");
-    if (words.length > wordLimit) {
-      return words.slice(0, wordLimit).join(" ") + "...";
-    }
-    return text;
-  };
+import truncateText from "../../utils/truncateText";
 
+export default function PostCard({ post }) {
   return (
     <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
       <a href={`/post/${post.id}`}>
