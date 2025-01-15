@@ -10,7 +10,7 @@ export default function LoginForm() {
       <form action="" className="small-font-size flex flex-col gap-4 mb-4">
         <div className="">
           <label htmlFor="email" className="block font-medium mb-2">
-            Email
+            Email <span className="text-red-600">*</span>
           </label>
           <input
             id="email"
@@ -22,7 +22,7 @@ export default function LoginForm() {
         <div className="">
           <div className="flex justify-between items-center mb-2">
             <label htmlFor="password" className="block font-medium">
-              Password
+              Password <span className="text-red-600">*</span>
             </label>
             <Link to="#" className="text-xs">
               Lupa password?

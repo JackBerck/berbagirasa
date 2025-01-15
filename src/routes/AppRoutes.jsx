@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 import Layout from "../layouts";
 import Home from "../pages/Home";
 import Register from "../pages/Authentication/Register";
@@ -8,6 +13,8 @@ import PostDetail from "../components/Post/PostDetail";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Donation from "../pages/Donation";
+import AddPost from "../pages/Post/AddPost";
+import DashboardProfile from "../pages/Dashboard/index";
 
 function AppRoutes() {
   return (
@@ -21,6 +28,11 @@ function AppRoutes() {
           <Route path="/tentang-kami" element={<AboutUsWrapper />} />
           <Route path="/kontak" element={<ContactWrapper />} />
           <Route path="/donasi" element={<DonationWrapper />} />
+          <Route
+            path="/postingan/tambah-postingan"
+            element={<AddPostWrapper />}
+          />
+          <Route path="/dashboard/profil" element={<DashboardProfileWrapper />} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </Layout>
@@ -58,21 +70,35 @@ function AboutUsWrapper() {
   useEffect(() => {
     document.title = "Tentang Kami | BerbagiRasa";
   }, []);
-  return <About/>;
+  return <About />;
 }
 
 function ContactWrapper() {
   useEffect(() => {
     document.title = "Kontak | BerbagiRasa";
   }, []);
-  return <Contact/>;
+  return <Contact />;
 }
 
 function DonationWrapper() {
   useEffect(() => {
     document.title = "Donasi | BerbagiRasa";
   }, []);
-  return <Donation/>;
+  return <Donation />;
+}
+
+function AddPostWrapper() {
+  useEffect(() => {
+    document.title = "Tambah Postingan | BerbagiRasa";
+  }, []);
+  return <AddPost />;
+}
+
+function DashboardProfileWrapper() {
+  useEffect(() => {
+    document.title = "Profil | BerbagiRasa";
+  }, []);
+  return <DashboardProfile/>
 }
 
 export default AppRoutes;

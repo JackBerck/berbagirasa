@@ -10,7 +10,7 @@ export default function RegisterForm() {
       <form action="" className="flex flex-col gap-4 mb-4">
         <div className="">
           <label htmlFor="username" className="block font-medium mb-2">
-            Nama lengkap
+            Nama lengkap <span className="text-red-600">*</span>
           </label>
           <input
             className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
@@ -18,11 +18,12 @@ export default function RegisterForm() {
             name="username"
             id="username"
             placeholder="Masukkan nama lengkap..."
+            required
           />
         </div>
         <div className="">
           <label htmlFor="email" className="block font-medium mb-2">
-            Email
+            Email <span className="text-red-600">*</span>
           </label>
           <input
             className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
@@ -30,11 +31,12 @@ export default function RegisterForm() {
             name="email"
             id="email"
             placeholder="Masukkan alamat email..."
+            required
           />
         </div>
         <div className="">
           <label htmlFor="phoneNumber" className="block font-medium mb-2">
-            Nomor handphone
+            Nomor handphone <span className="text-red-600">*</span>
           </label>
           <input
             className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
@@ -44,12 +46,13 @@ export default function RegisterForm() {
             placeholder="Masukkan nomor handphone..."
             inputMode="numeric"
             pattern="[0-9]*"
+            required
           />
         </div>
         <div className="">
           <div className="flex justify-between">
             <label htmlFor="password" className="block font-medium mb-2">
-              Password
+              Password <span className="text-red-600">*</span>
             </label>
           </div>
           <input
@@ -58,12 +61,13 @@ export default function RegisterForm() {
             name="password"
             id="password"
             placeholder="Masukkan password..."
+            required
           />
         </div>
         <div className="">
           <div className="flex justify-between">
             <label htmlFor="verifyPassword" className="block font-medium mb-2">
-              Masukkan kembali password
+              Masukkan kembali password <span className="text-red-600">*</span>
             </label>
           </div>
           <input
@@ -72,6 +76,7 @@ export default function RegisterForm() {
             name="verifyPassword"
             id="verifyPassword"
             placeholder="Verifikasi password..."
+            required
           />
         </div>
         <div className="">
