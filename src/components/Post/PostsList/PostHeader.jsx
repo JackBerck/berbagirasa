@@ -3,7 +3,7 @@ export default function PostHeader({ title }) {
     <div className="flex justify-between items-center">
       <h1 className="big-font-size font-bold">{title}</h1>
       <a
-        href="/posts"
+        href="/postingan"
         className="text-blue-base underline flex items-center gap-1 small-font-size"
       >
         Lihat selengkapnya{" "}

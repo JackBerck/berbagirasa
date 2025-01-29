@@ -3,7 +3,7 @@ import truncateText from "../../utils/truncateText";
 export default function PostCard({ post }) {
   return (
     <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-      <a href={`/post/${post.id}`}>
+      <a href={`/postingan/${post.id}`}>
         <img
           className="object-cover w-full max-h-48 rounded-lg mb-2"
           src={post.images[0]}
@@ -22,7 +22,7 @@ export default function PostCard({ post }) {
           </svg>
           <p>{post.location}</p>
         </span>
-        <a href={`/post/${post.id}`}>
+        <a href={`/postingan/${post.id}`}>
           <h2 className="card-title-font-size font-semibold">
             {truncateText(post.title, 4)}
           </h2>

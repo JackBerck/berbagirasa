@@ -1,11 +1,13 @@
+import { useAuth } from "../../context/AuthContext";
 import FooterLink from "./FooterLink";
 import SocialMediaLinks from "./SocialMediaLinks";
 import { navigationRoutes } from "../../data/routes";
 import { followUs } from "../../data/follow-us";
 import { legal } from "../../data/legal";
-import { socialMediaLinks } from "../../data/social-media";
 
 export default function Footer() {
+  const { isLoggedIn } = useAuth();
+  
   return (
     <footer
       id="footer"
@@ -26,7 +28,7 @@ export default function Footer() {
             </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            <FooterLink title="Tautan" links={navigationRoutes} />
+            <FooterLink title="Tautan" links={navigationRoutes(isLoggedIn)} />
             <FooterLink title="Ikuti Kami" links={followUs} />
             <FooterLink title="Legal" links={legal} />
           </div>
@@ -36,7 +38,7 @@ export default function Footer() {
           <span className="text-gray-500 sm:text-center">
             &copy; {new Date().getFullYear()}{" "}
             <a href="https://flowbite.com/" className="hover:underline">
-              BerbagiRasa™
+              BerbagiRasa&#8482;
             </a>
             . All Rights Reserved.
           </span>

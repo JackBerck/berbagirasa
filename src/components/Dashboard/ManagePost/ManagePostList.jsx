@@ -2,7 +2,7 @@ import { posts } from "../../../data/posts";
 import truncateText from "../../../utils/truncateText";
 import ManagePostAction from "./ManagePostAction";
 
-export default function ManagePostList() {
+export default function ManagePostList({ onDeleteClick }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
       {posts.map((post, index) => (
@@ -10,7 +10,7 @@ export default function ManagePostList() {
           key={post.id}
           className="flex flex-col bg-white shadow-md rounded-md overflow-hidden relative"
         >
-          <ManagePostAction postId={post.id} />
+          <ManagePostAction postId={post.id} onDeleteClick={onDeleteClick} />
           <a href={`/post/${post.id}`}>
             <img
               className="object-cover w-full max-h-48 rounded-lg mb-2"

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import NavigationLink from "./NavigationLink";
 import { navigationRoutes } from "../../data/routes";
+import { useAuth } from "../../context/AuthContext";
 
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isLoggedIn } = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -42,7 +44,7 @@ export default function NavigationBar() {
           }`}
         >
           <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row rtl:space-x-reverse lg:mt-0 lg:border-0 gap-2 lg:gap-0">
-            {navigationRoutes.map((route, index) => (
+            {navigationRoutes(isLoggedIn).map((route, index) => (
               <NavigationLink key={index} url={route.path} addClass={route.title.toLowerCase() === "daftar" && "bg-green-base text-light-base"}>
                 {route.title}
               </NavigationLink>

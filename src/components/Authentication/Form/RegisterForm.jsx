@@ -1,85 +1,145 @@
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 export default function RegisterForm() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+    verifyPassword: "",
+  });
+
+  const [errorMessage, setErrorMessage] = useState(null); // Untuk pesan error
+  const [successMessage, setSuccessMessage] = useState(null); // Untuk pesan sukses
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.verifyPassword) {
+      setErrorMessage("Password dan verifikasi password tidak cocok.");
+      return;
+    }
+    try {
+      const response = await axios.post("http://localhost:8000/api/register", {
+        name: formData.username,
+        email: formData.email,
+        phone: formData.phoneNumber,
+        password: formData.password,
+      });
+      setSuccessMessage("Registrasi berhasil! Silakan login.");
+      setErrorMessage(null);
+      setFormData({
+        username: "",
+        email: "",
+        phoneNumber: "",
+        password: "",
+        verifyPassword: "",
+      });
+      // redirect("/masuk");
+    } catch (error) {
+      setErrorMessage(error.response?.data?.message || "Terjadi kesalahan.");
+    }
+  };
+
   return (
     <div className="w-full p-8 lg:w-1/2">
       <h1 className="title-font-size font-bold mb-1 md:text-center">
         BerbagiRasa
       </h1>
       <p className="mb-2 md:text-center">Daftar akun baru</p>
-      <form action="" className="flex flex-col gap-4 mb-4">
-        <div className="">
+      {errorMessage && <p className="text-red-600 text-center mb-2">{errorMessage}</p>}
+      {successMessage && <p className="text-green-600 text-center mb-2">{successMessage}</p>}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-4">
+        {/* Form fields */}
+        <div>
           <label htmlFor="username" className="block font-medium mb-2">
             Nama lengkap <span className="text-red-600">*</span>
           </label>
           <input
-            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             type="text"
             name="username"
             id="username"
             placeholder="Masukkan nama lengkap..."
+            value={formData.username}
+            onChange={handleChange}
             required
+            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
           />
         </div>
-        <div className="">
+        {/* Email */}
+        <div>
           <label htmlFor="email" className="block font-medium mb-2">
             Email <span className="text-red-600">*</span>
           </label>
           <input
-            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             type="email"
             name="email"
             id="email"
             placeholder="Masukkan alamat email..."
+            value={formData.email}
+            onChange={handleChange}
             required
+            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
           />
         </div>
-        <div className="">
+        {/* Nomor Telepon */}
+        <div>
           <label htmlFor="phoneNumber" className="block font-medium mb-2">
             Nomor handphone <span className="text-red-600">*</span>
           </label>
           <input
-            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             type="text"
-            id="phoneNumber"
             name="phoneNumber"
+            id="phoneNumber"
             placeholder="Masukkan nomor handphone..."
-            inputMode="numeric"
-            pattern="[0-9]*"
+            value={formData.phoneNumber}
+            onChange={handleChange}
             required
+            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
           />
         </div>
-        <div className="">
-          <div className="flex justify-between">
-            <label htmlFor="password" className="block font-medium mb-2">
-              Password <span className="text-red-600">*</span>
-            </label>
-          </div>
+        {/* Password */}
+        <div>
+          <label htmlFor="password" className="block font-medium mb-2">
+            Password <span className="text-red-600">*</span>
+          </label>
           <input
-            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             type="password"
             name="password"
             id="password"
             placeholder="Masukkan password..."
+            value={formData.password}
+            onChange={handleChange}
             required
+            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
           />
         </div>
-        <div className="">
-          <div className="flex justify-between">
-            <label htmlFor="verifyPassword" className="block font-medium mb-2">
-              Masukkan kembali password <span className="text-red-600">*</span>
-            </label>
-          </div>
+        {/* Verify Password */}
+        <div>
+          <label htmlFor="verifyPassword" className="block font-medium mb-2">
+            Masukkan kembali password <span className="text-red-600">*</span>
+          </label>
           <input
-            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
             type="password"
             name="verifyPassword"
             id="verifyPassword"
             placeholder="Verifikasi password..."
+            value={formData.verifyPassword}
+            onChange={handleChange}
             required
+            className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
           />
         </div>
-        <div className="">
+        <div>
           <button
             type="submit"
             className="bg-blue-base text-light-base font-bold py-2 px-4 w-full rounded"

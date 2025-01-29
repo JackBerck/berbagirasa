@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ManagePostAction({ postId }) {
+export default function ManagePostAction({ postId, onDeleteClick }) {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const handleDeleteClick = () => {
@@ -33,7 +33,7 @@ export default function ManagePostAction({ postId }) {
         <button
           type="button"
           className="bg-red-600 p-2 rounded-full text-light-base"
-          onClick={handleDeleteClick}
+          onClick={() => onDeleteClick(postId)}
         >
           <svg
             className="w-5"

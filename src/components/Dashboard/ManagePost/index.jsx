@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ManagePostList from "./ManagePostList";
 
-export default function ManagePost() {
+export default function ManagePost({ onDeleteClick }) {
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="flex justify-between items-center">
@@ -13,13 +13,7 @@ export default function ManagePost() {
           Tambah Postingan
         </Link>
       </div>
-      <ManagePostList />
-      {showConfirm && (
-        <DeleteAlert
-          onConfirm={handleConfirmDelete}
-          onCancel={handleCancelDelete}
-        />
-      )}
+      <ManagePostList onDeleteClick={onDeleteClick} />
     </div>
   );
 }

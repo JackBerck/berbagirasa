@@ -16,6 +16,7 @@ import Donation from "../pages/Donation";
 import AddPost from "../pages/Post/AddPost";
 import DashboardProfile from "../pages/Dashboard";
 import DashboardManagePost from "../pages/Dashboard/ManagePost";
+import ErrorPage from "../pages/404";
 
 function AppRoutes() {
   return (
@@ -25,7 +26,7 @@ function AppRoutes() {
           <Route path="/" element={<HomeWrapper />} />
           <Route path="/masuk" element={<LoginWrapper />} />
           <Route path="/daftar" element={<RegisterWrapper />} />
-          <Route path="/post/:id" element={<PostDetailWrapper />} />
+          <Route path="/postingan/:id" element={<PostDetailWrapper />} />
           <Route path="/tentang-kami" element={<AboutUsWrapper />} />
           <Route path="/kontak" element={<ContactWrapper />} />
           <Route path="/donasi" element={<DonationWrapper />} />
@@ -33,12 +34,12 @@ function AppRoutes() {
             path="/postingan/tambah-postingan"
             element={<AddPostWrapper />}
           />
-          <Route path="/dasbor" element={<DashboardProfileWrapper />} />
+          <Route path="/profil" element={<DashboardProfileWrapper />} />
           <Route
-            path="/dasbor/kelola-postingan"
+            path="/profil/kelola-postingan"
             element={<DashboardManagePostWrapper />}
           />
-          <Route path="*" element={<h1>404 Not Found</h1>} />
+          <Route path="*" element={<ErrorPageWrapper />} />
         </Routes>
       </Layout>
     </Router>
@@ -111,6 +112,13 @@ function DashboardManagePostWrapper() {
     document.title = "Kelola Postingan | BerbagiRasa";
   }, []);
   return <DashboardManagePost />;
+}
+
+function ErrorPageWrapper() {
+  useEffect(() => {
+    document.title = "404 | BerbagiRasa";
+  }, []);
+  return <ErrorPage />;
 }
 
 export default AppRoutes;
