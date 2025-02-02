@@ -1,18 +1,18 @@
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
-    phoneNumber: "",
+    phone: "",
     password: "",
     verifyPassword: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState(null); // Untuk pesan error
-  const [successMessage, setSuccessMessage] = useState(null); // Untuk pesan sukses
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,18 +29,26 @@ export default function RegisterForm() {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:8000/api/register", {
-        name: formData.username,
-        email: formData.email,
-        phone: formData.phoneNumber,
-        password: formData.password,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/register",
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setSuccessMessage("Registrasi berhasil! Silakan login.");
       setErrorMessage(null);
       setFormData({
-        username: "",
+        name: "",
         email: "",
-        phoneNumber: "",
+        phone: "",
         password: "",
         verifyPassword: "",
       });
@@ -56,20 +64,24 @@ export default function RegisterForm() {
         BerbagiRasa
       </h1>
       <p className="mb-2 md:text-center">Daftar akun baru</p>
-      {errorMessage && <p className="text-red-600 text-center mb-2">{errorMessage}</p>}
-      {successMessage && <p className="text-green-600 text-center mb-2">{successMessage}</p>}
+      {errorMessage && (
+        <p className="text-red-600 text-center mb-2">{errorMessage}</p>
+      )}
+      {successMessage && (
+        <p className="text-green-600 text-center mb-2">{successMessage}</p>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-4">
         {/* Form fields */}
         <div>
-          <label htmlFor="username" className="block font-medium mb-2">
+          <label htmlFor="name" className="block font-medium mb-2">
             Nama lengkap <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
-            name="username"
-            id="username"
+            name="name"
+            id="name"
             placeholder="Masukkan nama lengkap..."
-            value={formData.username}
+            value={formData.name}
             onChange={handleChange}
             required
             className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
@@ -93,15 +105,15 @@ export default function RegisterForm() {
         </div>
         {/* Nomor Telepon */}
         <div>
-          <label htmlFor="phoneNumber" className="block font-medium mb-2">
+          <label htmlFor="phone" className="block font-medium mb-2">
             Nomor handphone <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
-            name="phoneNumber"
-            id="phoneNumber"
+            name="phone"
+            id="phone"
             placeholder="Masukkan nomor handphone..."
-            value={formData.phoneNumber}
+            value={formData.phone}
             onChange={handleChange}
             required
             className="small-font-size bg-gray-100 focus:outline-none border border-gray-300 rounded py-2 px-4 block w-full appearance-none"

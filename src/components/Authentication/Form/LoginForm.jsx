@@ -29,7 +29,7 @@ export default function LoginForm() {
         email: formData.email,
         password: formData.password,
       });
-      login(response.data.token);
+      login(response.data.data.access_token);
       setSuccessMessage("Login berhasil!");
       setErrorMessage(null);
       setFormData({
@@ -38,7 +38,7 @@ export default function LoginForm() {
       });
       navigate("/");
     } catch (error) {
-      setErrorMessage(error.response?.data?.message || "Terjadi kesalahan.");
+      setErrorMessage(error.response?.data?.data?.message || "Terjadi kesalahan.");
     }
   };
 

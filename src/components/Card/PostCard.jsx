@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import truncateText from "../../utils/truncateText";
 
 export default function PostCard({ post }) {
   return (
     <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
-      <a href={`/postingan/${post.id}`}>
+      <Link to={`/postingan/${post.id}`}>
         <img
           className="object-cover w-full max-h-48 rounded-lg mb-2"
           src={post.images[0]}
           alt={`${post.title} Image`}
         />
-      </a>
+      </Link>
       <div className="p-1 md:p-2">
         <span className="flex gap-1 md:gap-2 items-center card-description-font-size">
           <svg
@@ -22,13 +23,13 @@ export default function PostCard({ post }) {
           </svg>
           <p>{post.location}</p>
         </span>
-        <a href={`/postingan/${post.id}`}>
+        <Link to={`/postingan/${post.id}`}>
           <h2 className="card-title-font-size font-semibold">
             {truncateText(post.title, 4)}
           </h2>
-        </a>
+        </Link>
         <p className="card-description-font-size text-gray-600">
-          {truncateText(post.content, 5)}
+          {truncateText(post.description, 5)}
         </p>
       </div>
     </div>

@@ -1,8 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function () {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <>
@@ -40,12 +48,12 @@ export default function () {
           >
             Kelola Postingan
           </Link>
-          <Link
-            to="/keluar"
+          <button
+            onClick={handleLogout}
             className="flex items-center px-3 py-2.5 font-medium normal-font-size bg-red-600 text-light-base rounded-lg"
           >
             Keluar
-          </Link>
+          </button>
         </div>
       </aside>
     </>
