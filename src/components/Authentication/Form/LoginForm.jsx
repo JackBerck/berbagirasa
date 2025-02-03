@@ -8,19 +8,9 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
-
   const [errorMessage, setErrorMessage] = useState(null);
-  const [successMessage, setSuccessMessage] = useState(null);
   const { login } = useAuth();
   const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,9 +41,6 @@ export default function LoginForm() {
       {errorMessage && (
         <p className="text-red-600 text-center mb-2">{errorMessage}</p>
       )}
-      {successMessage && (
-        <p className="text-green-600 text-center mb-2">{successMessage}</p>
-      )}
       <form onSubmit={handleSubmit} className="small-font-size flex flex-col gap-4 mb-4">
         <div className="">
           <label htmlFor="email" className="block font-medium mb-2">
@@ -66,7 +53,7 @@ export default function LoginForm() {
             name="email"
             placeholder="Masukkan alamat email..."
             value={formData.email}
-            onChange={handleChange}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
           />
         </div>
@@ -86,7 +73,7 @@ export default function LoginForm() {
             name="password"
             placeholder="Masukkan password..."
             value={formData.password}
-            onChange={handleChange}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             required
           />
         </div>

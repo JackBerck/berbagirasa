@@ -4,10 +4,10 @@ import axios from "axios";
 export default function AddPostForm() {
   const [profile, setProfile] = useState({});
   const [post, setPost] = useState({
-    title: "Testing",
-    location: "Testing",
-    categoryId: 1,
-    description: "Testing saja",
+    title: "",
+    location: "",
+    categoryId: 0,
+    description: "",
     images: [],
   });
   const [errorMessage, setErrorMessage] = useState(null);
@@ -24,10 +24,9 @@ export default function AddPostForm() {
             },
           }
         );
-        const profileResponse = response.data.data;
-        setProfile(profileResponse);
+        setProfile(response.data.data);
       } catch (error) {
-        errorMessage("Terjadi kesalahan.");
+        setErrorMessage("Terjadi kesalahan.");
       }
     };
 
@@ -46,11 +45,13 @@ export default function AddPostForm() {
 
     const validFiles = files.filter((file) => {
       if (!allowedTypes.includes(file.type)) {
-        errorMessage(`Tipe file ${file.name} tidak didukung.`);
+        setErrorMessage(`Tipe file ${file.name} tidak didukung.`);
         return false;
       }
       if (file.size > maxSize) {
-        errorMessage(`Ukuran file ${file.name} terlalu besar. Maksimal 2MB.`);
+        setErrorMessage(
+          `Ukuran file ${file.name} terlalu besar. Maksimal 2MB.`
+        );
         return false;
       }
       return true;
@@ -73,16 +74,12 @@ export default function AddPostForm() {
         formData.append("images[]", image);
       });
 
-      const response = await axios.post(
-        "http://localhost:8000/api/posts",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.post("http://localhost:8000/api/posts", formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setSuccessMessage("Postingan berhasil ditambahkan!");
       setErrorMessage(null);
@@ -100,23 +97,20 @@ export default function AddPostForm() {
 
   return (
     <div>
-      {/* Error message */}
       {errorMessage && (
         <div className="mb-4 bg-red-100 border-l-4 border-red-500 text-red-700 p-4">
           {errorMessage}
         </div>
       )}
 
-      {/* Success message */}
       {successMessage && (
         <div className="mb-4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4">
           {successMessage}
         </div>
       )}
+
       <form onSubmit={handleSubmit}>
-        {/* Form fields */}
         <div className="grid gap-4 sm:grid-cols-2 mb-6">
-          {/* Judul */}
           <div>
             <label htmlFor="title" className="block mb-2 font-medium">
               Judul <span className="text-red-600">*</span>
@@ -133,7 +127,6 @@ export default function AddPostForm() {
             />
           </div>
 
-          {/* Lokasi */}
           <div>
             <label htmlFor="location" className="block mb-2 font-medium">
               Lokasi <span className="text-red-600">*</span>
@@ -150,7 +143,6 @@ export default function AddPostForm() {
             />
           </div>
 
-          {/* Kategori */}
           <div>
             <label htmlFor="category" className="block mb-2 font-medium">
               Kategori <span className="text-red-600">*</span>
@@ -175,7 +167,6 @@ export default function AddPostForm() {
             </select>
           </div>
 
-          {/* Unggah Foto */}
           <div className="items-center justify-center w-full order-last sm:order-none flex sm:row-span-2">
             <label
               htmlFor="dropzone-file"
@@ -216,7 +207,6 @@ export default function AddPostForm() {
             </label>
           </div>
 
-          {/* Deskripsi */}
           <div>
             <label htmlFor="description" className="block mb-2 font-medium">
               Deskripsi <span className="text-red-600">*</span>
@@ -236,7 +226,6 @@ export default function AddPostForm() {
           </div>
         </div>
 
-        {/* File Preview */}
         <div id="file-preview-container" className="flex flex-wrap gap-2 mb-4">
           {post.images.map((image, index) => (
             <div className="relative" key={index}>
@@ -268,7 +257,6 @@ export default function AddPostForm() {
           ))}
         </div>
 
-        {/* Submit Button */}
         <button
           type="submit"
           className="text-light-base bg-blue-base inline-flex items-center focus:ring-4 focus:outline-none font-medium rounded-md px-5 py-2.5 text-center"
