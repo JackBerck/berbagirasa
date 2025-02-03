@@ -37,13 +37,13 @@ export default function () {
         <div className="sticky flex flex-col gap-2 text-sm">
           <h1 className="pl-3 title-font-size font-semibold">Dasbor</h1>
           <Link
-            to="/dasbor"
+            to="/profil"
             className="flex items-center px-3 py-2.5 font-medium normal-font-size "
           >
             Pengaturan Akun
           </Link>
           <Link
-            to="/dasbor/kelola-postingan"
+            to="/profil/kelola-postingan"
             className="flex items-center px-3 py-2.5 font-medium normal-font-size "
           >
             Kelola Postingan

@@ -5,6 +5,7 @@ import {
   Route,
   useParams,
 } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import Layout from "../layouts";
 import Home from "../pages/Home";
 import Register from "../pages/Authentication/Register";
@@ -17,8 +18,11 @@ import AddPost from "../pages/Post/AddPost";
 import DashboardProfile from "../pages/Dashboard";
 import DashboardManagePost from "../pages/Dashboard/ManagePost";
 import ErrorPage from "../pages/404";
+import UpdatePost from "../pages/Post/UpdatePost";
 
 function AppRoutes() {
+  const { isLoggedIn } = useAuth();
+
   return (
     <Router>
       <Layout>
@@ -26,19 +30,32 @@ function AppRoutes() {
           <Route path="/" element={<HomeWrapper />} />
           <Route path="/masuk" element={<LoginWrapper />} />
           <Route path="/daftar" element={<RegisterWrapper />} />
-          <Route path="/postingan/:id" element={<PostDetailWrapper />} />
           <Route path="/tentang-kami" element={<AboutUsWrapper />} />
           <Route path="/kontak" element={<ContactWrapper />} />
           <Route path="/donasi" element={<DonationWrapper />} />
-          <Route
-            path="/postingan/tambah-postingan"
-            element={<AddPostWrapper />}
-          />
-          <Route path="/profil" element={<DashboardProfileWrapper />} />
-          <Route
-            path="/profil/kelola-postingan"
-            element={<DashboardManagePostWrapper />}
-          />
+          <Route path="/postingan">
+            <Route index=":id" element={<PostDetailWrapper />} />
+            {isLoggedIn && (
+              <Route path="tambah-postingan" element={<AddPostWrapper />} />
+            )}
+            {!isLoggedIn && (
+              <Route path="tambah-postingan" element={<LoginWrapper />} />
+            )}
+          </Route>
+          {isLoggedIn && (
+            <Route path="/profil">
+              <Route index="/" element={<DashboardProfileWrapper />} />
+              <Route
+                path="kelola-postingan"
+                element={<DashboardManagePostWrapper />}
+              />
+              <Route
+                path="kelola-postingan/:id"
+                element={<UpdatePostWrapper />}
+              />
+            </Route>
+          )}
+          {!isLoggedIn && <Route path="/profil/*" element={<LoginWrapper />} />}
           <Route path="*" element={<ErrorPageWrapper />} />
         </Routes>
       </Layout>
@@ -98,6 +115,13 @@ function AddPostWrapper() {
     document.title = "Tambah Postingan | BerbagiRasa";
   }, []);
   return <AddPost />;
+}
+
+function UpdatePostWrapper() {
+  useEffect(() => {
+    document.title = "Perbarui Postingan | BerbagiRasa";
+  }, []);
+  return <UpdatePost />;
 }
 
 function DashboardProfileWrapper() {

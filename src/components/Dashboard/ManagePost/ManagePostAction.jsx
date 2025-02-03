@@ -3,24 +3,13 @@ import { useState } from "react";
 export default function ManagePostAction({ postId, onDeleteClick }) {
   const [showConfirm, setShowConfirm] = useState(false);
 
-  const handleDeleteClick = () => {
-    setShowConfirm(true);
-  };
-
-  const handleConfirmDelete = () => {
-    // Delete logic here, using postId
-    console.log(`Deleting post with ID: ${postId}`);
-    setShowConfirm(false);
-  };
-
-  const handleCancelDelete = () => {
-    setShowConfirm(false);
-  };
-
   return (
     <>
       <div className="absolute flex gap-2 items-center top-1 right-1">
-        <a href="#" className="bg-blue-base p-2 rounded-full text-light-base">
+        <a
+          href={`kelola-postingan/${postId}`}
+          className="bg-blue-base p-2 rounded-full text-light-base"
+        >
           <svg
             className="w-5"
             fill="currentColor"

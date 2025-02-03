@@ -1,17 +1,43 @@
-import { posts } from "../../../data/posts";
+import { useState, useEffect } from "react";
 import truncateText from "../../../utils/truncateText";
 import ManagePostAction from "./ManagePostAction";
+import { getCurrentUser } from "../../../api/user";
+import {getPosts} from "../../../api/posts";
 
 export default function ManagePostList({ onDeleteClick }) {
+  const [currentUser, setCurrentUser] = useState({});
+  const [userPost, setUserPost] = useState([]);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const currentUserData = await getCurrentUser();
+      setCurrentUser(currentUserData);
+    };
+
+    fetchCurrentUser();
+  }, []);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const getAllPost = await getPosts();
+      const userPosts = getAllPost.filter(post => post.author.id === currentUser.id);
+      setUserPost(userPosts);
+    };
+
+    if (currentUser.id) {
+      fetchPosts();
+    }
+  }, [currentUser]);
+
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {posts.map((post, index) => (
+      {userPost.map((post, index) => (
         <div
           key={post.id}
           className="flex flex-col bg-white shadow-md rounded-md overflow-hidden relative"
         >
           <ManagePostAction postId={post.id} onDeleteClick={onDeleteClick} />
-          <a href={`/post/${post.id}`}>
+          <a href={`/postingan/${post.id}`}>
             <img
               className="object-cover w-full max-h-48 rounded-lg mb-2"
               src={post.images[0]}
@@ -30,13 +56,13 @@ export default function ManagePostList({ onDeleteClick }) {
               </svg>
               <p>{post.location}</p>
             </span>
-            <a href={`/post/${post.id}`}>
+            <a href={`/postingan/${post.id}`}>
               <h2 className="card-title-font-size font-semibold">
                 {truncateText(post.title, 4)}
               </h2>
             </a>
             <p className="card-description-font-size text-gray-600">
-              {truncateText(post.content, 5)}
+              {truncateText(post.description, 5)}
             </p>
           </div>
         </div>

@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { getCurrentUser } from "../../../api/user";
 
 export default function ManageProfile() {
-  const [profile, setProfile] = useState({
-    id: "",
-    name: "",
-    address: "",
-    bio: "",
-    email: "",
-    phone: "",
-  });
+  const [currentUser, setCurrentUser] = useState({});
   const [isChangePassword, setIsChangePassword] = useState(false);
   const [passwords, setPasswords] = useState({
     currentPassword: "",
@@ -24,25 +18,12 @@ export default function ManageProfile() {
   };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/users/current",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        const profileResponse = response.data.data;
-        setProfile(profileResponse);
-      } catch (error) {
-        console.error("Gagal mengambil data profil:", error);
-        setErrorMessage("Gagal mengambil data profil. Silakan coba lagi.");
-      }
+    const fetchCurrentUser = async () => {
+      const currentUserData = await getCurrentUser();
+      setCurrentUser(currentUserData);
     };
 
-    fetchProfile();
+    fetchCurrentUser();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -52,16 +33,16 @@ export default function ManageProfile() {
 
     try {
       const formData = new FormData();
-      formData.append("name", profile.name || "");
-      formData.append("address", profile.address || "");
-      formData.append("bio", profile.bio || "");
+      formData.append("name", currentUser.name || "");
+      formData.append("address", currentUser.address || "");
+      formData.append("bio", currentUser.bio || "");
       formData.append("_method", "patch");
 
-      if (profile.photo instanceof File) {
-        formData.append("photo", profile.photo);
+      if (currentUser.photo instanceof File) {
+        formData.append("photo", currentUser.photo);
       }
 
-      if (!profile.name) {
+      if (!currentUser.name) {
         setErrorMessage("Nama harus diisi.");
         return;
       }
@@ -110,15 +91,15 @@ export default function ManageProfile() {
       className="flex flex-col gap-4 w-full max-w-lg"
       onSubmit={handleSubmit}
     >
-      <input type="hidden" name="id" value={profile.id || ""} />
+      <input type="hidden" name="id" value={currentUser.id || ""} />
       <div className="flex gap-4 items-center">
         <img
           src={
-            profile.photo instanceof File
-              ? URL.createObjectURL(profile.photo)
-              : profile.photo || "/img/users/default.png"
+            currentUser.photo instanceof File
+              ? URL.createObjectURL(currentUser.photo)
+              : currentUser.photo || "/img/users/default.png"
           }
-          alt={`${profile.name} Photo`}
+          alt={`${currentUser.name} Photo`}
           className="w-36 aspect-square rounded-full bg-gray-200"
         />
         <div className="flex flex-col gap-4">
@@ -134,8 +115,8 @@ export default function ManageProfile() {
               id="photo"
               className="hidden"
               onChange={(e) =>
-                setProfile({
-                  ...profile,
+                setCurrentUser({
+                  ...currentUser,
                   photo: e.target.files[0],
                 })
               }
@@ -144,7 +125,7 @@ export default function ManageProfile() {
           <button
             type="button"
             className="bg-red-600 py-2 px-4 rounded-md text-light-base font-semibold"
-            onClick={() => setProfile({ ...profile, photo: "" })}
+            onClick={() => setCurrentUser({ ...currentUser, photo: "" })}
           >
             Hapus Foto Profil
           </button>
@@ -159,9 +140,9 @@ export default function ManageProfile() {
           id="name"
           className="border border-gray-600 rounded-md px-3 py-2"
           placeholder="Masukkan nama..."
-          value={profile.name || ""}
+          value={currentUser.name || ""}
           required
-          onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+          onChange={(e) => setCurrentUser({ ...currentUser, name: e.target.value })}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -174,7 +155,7 @@ export default function ManageProfile() {
           className="border border-gray-600 rounded-md px-3 py-2"
           placeholder="Masukkan email..."
           readOnly
-          value={profile.email || ""}
+          value={currentUser.email || ""}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -186,9 +167,9 @@ export default function ManageProfile() {
           id="phone"
           className="border border-gray-600 rounded-md px-3 py-2"
           placeholder="Masukkan nomor telepon..."
-          value={profile.phone || ""}
+          value={currentUser.phone || ""}
           readOnly
-          onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+          onChange={(e) => setCurrentUser({ ...currentUser, phone: e.target.value })}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -199,8 +180,8 @@ export default function ManageProfile() {
           id="address"
           className="border border-gray-600 rounded-md px-3 py-2"
           placeholder="Masukkan alamat..."
-          value={profile.address || ""}
-          onChange={(e) => setProfile({ ...profile, address: e.target.value })}
+          value={currentUser.address || ""}
+          onChange={(e) => setCurrentUser({ ...currentUser, address: e.target.value })}
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -211,8 +192,8 @@ export default function ManageProfile() {
           id="bio"
           className="border border-gray-600 h-auto rounded-md px-3 py-2"
           placeholder="Masukkan bio..."
-          value={profile.bio || ""}
-          onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+          value={currentUser.bio || ""}
+          onChange={(e) => setCurrentUser({ ...currentUser, bio: e.target.value })}
         />
       </div>
       <button

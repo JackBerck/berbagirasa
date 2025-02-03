@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext";
-import { posts } from "../../data/posts";
 import Post from "../../components/Post/PostsList";
-import AddPostButton from "../Post/AddPostButton";
+import AddPostButton from "../../components/Post/AddPost/AddPostButton";
+import { getPosts } from "../../api/posts";
 
 export default function Home() {
   const { isLoggedIn } = useAuth();
@@ -11,13 +11,8 @@ export default function Home() {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/api/posts");
-        const postsResponse = response.data.data;
-        setNewPosts(postsResponse);
-      } catch (error) {
-        console.error(error);
-      }
+      const getAllPost = await getPosts();
+      setNewPosts(getAllPost);
     };
 
     fetchPosts();
