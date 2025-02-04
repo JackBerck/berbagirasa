@@ -11,6 +11,7 @@ export default function DashboardManagePost() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [posts, setPosts] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -31,7 +32,7 @@ export default function DashboardManagePost() {
         });
         setPosts(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
-        console.error("Gagal mengambil data postingan:", error);
+        setErrorMessage("Gagal mengambil data postingan");
       }
     };
 
@@ -56,17 +57,9 @@ export default function DashboardManagePost() {
       setPostIdToDelete(null);
       window.location.reload();
     } catch (error) {
-      console.error("Gagal menghapus postingan:", error);
+      setErrorMessage("Gagal menghapus postingan.")
     }
   };
-
-  /*useEffect(() => {
-    if (isDeleted) {
-      setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postIdToDelete));
-      setIsDeleted(false);
-    }
-  }, [isDeleted]);
-  */
 
   const handleCancelDelete = () => {
     setShowConfirm(false);
@@ -81,6 +74,11 @@ export default function DashboardManagePost() {
       >
         <div className="container max-w-screen-xl">
           <div className="flex flex-col md:flex-row gap-8">
+          {
+            errorMessage && (
+              <p className="text-red-600">{errorMessage}</p>
+            )
+          }
             <Aside />
             <ManagePost posts={posts} onDeleteClick={handleDeleteClick} />
           </div>

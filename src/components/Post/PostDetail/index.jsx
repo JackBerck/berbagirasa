@@ -1,14 +1,35 @@
-import { useEffect } from "react";
-import { getPostById } from "../../../utils/post";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import PostContent from "./PostContent";
 import PostImages from "./PostImages";
+import { getPost } from "../../../api/posts";
 
-export default function PostDetail({ postId }) {
-  const post = getPostById(postId);
+export default function PostDetail() {
+  const { id } = useParams();
+  const [post, setPost] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = `${post.title} | BerbagiRasa`;
+    const fetchPost = async () => {
+      const post = await getPost(id);
+      setPost(post);
+      setLoading(false);
+    };
+
+    if (id) {
+      fetchPost();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (post.title) {
+      document.title = `${post.title} | BerbagiRasa`;
+    }
   }, [post.title]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main
@@ -19,7 +40,7 @@ export default function PostDetail({ postId }) {
         <PostImages title={post.title} images={post.images} />
       </section>
       <section className="section-padding-x-sm pt-4 pb-4 lg:w-2/5">
-        <PostContent post={post} />
+        {post && <PostContent post={post} />}
       </section>
     </main>
   );

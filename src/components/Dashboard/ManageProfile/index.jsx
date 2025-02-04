@@ -77,6 +77,7 @@ export default function ManageProfile() {
         }
       );
 
+      window.location.reload()
       setSuccessMessage("Profil berhasil diperbarui!");
     } catch (error) {
       setErrorMessage(
@@ -100,7 +101,7 @@ export default function ManageProfile() {
               : currentUser.photo || "/img/users/default.png"
           }
           alt={`${currentUser.name} Photo`}
-          className="w-36 aspect-square rounded-full bg-gray-200"
+          className="w-36 aspect-square rounded-full bg-gray-200 object-cover"
         />
         <div className="flex flex-col gap-4">
           <div className="bg-blue-base py-2 px-4 rounded-md font-semibold w-fit">

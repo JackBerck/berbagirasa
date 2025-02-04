@@ -16,18 +16,13 @@ const navigationRoutes = (isLoggedIn) =>
       title: "Donasi",
       path: "/donasi",
     },
-    isLoggedIn
-      ? {
-          title: "Profil",
-          path: "/profil",
-        }
-      : {
-          title: "Masuk",
-          path: "/masuk",
-        },
     !isLoggedIn && {
       title: "Daftar",
       path: "/daftar",
+    },
+    !isLoggedIn && {
+      title: "Masuk",
+      path: "/masuk",
     },
   ].filter(Boolean);
 

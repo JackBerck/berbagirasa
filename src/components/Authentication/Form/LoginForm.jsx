@@ -20,7 +20,6 @@ export default function LoginForm() {
         password: formData.password,
       });
       login(response.data.data.access_token);
-      setSuccessMessage("Login berhasil!");
       setErrorMessage(null);
       setFormData({
         email: "",
@@ -28,6 +27,7 @@ export default function LoginForm() {
       });
       navigate("/");
     } catch (error) {
+      console.log(error);
       setErrorMessage(error.response?.data?.data?.message || "Terjadi kesalahan.");
     }
   };

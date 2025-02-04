@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavigationLink from "./NavigationLink";
 import { navigationRoutes } from "../../data/routes";
 import { useAuth } from "../../context/AuthContext";
+import { getCurrentUser } from "../../api/user";
 
 export default function NavigationBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isLoggedIn } = useAuth();
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const user = await getCurrentUser();
+      setCurrentUser(user);
+    };
+
+    if (isLoggedIn) {
+      fetchCurrentUser();
+    }
+  }, [isLoggedIn]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,10 +31,14 @@ export default function NavigationBar() {
       className={`section-padding-x fixed top-0 w-full z-[998] text-dark-base normal-font-size transition-all duration-300 bg-light-base shadow-md`}
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto xl:px-0 py-4">
-        <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+        <Link
+          to="/"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
+        >
           <img src="/favicon.webp" className="w-10" alt="BerbagiRasa Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
-            <span className="text-green-base">Berbagi</span><span className="text-blue-base">Rasa</span>
+            <span className="text-green-base">Berbagi</span>
+            <span className="text-blue-base">Rasa</span>
           </span>
         </Link>
         <button
@@ -45,10 +62,25 @@ export default function NavigationBar() {
         >
           <ul className="font-medium flex flex-col p-4 lg:p-0 mt-4 border rounded-lg lg:flex-row rtl:space-x-reverse lg:mt-0 lg:border-0 gap-2 lg:gap-0">
             {navigationRoutes(isLoggedIn).map((route, index) => (
-              <NavigationLink key={index} url={route.path} addClass={route.title.toLowerCase() === "daftar" && "bg-green-base text-light-base"}>
+              <NavigationLink
+                key={index}
+                url={route.path}
+                addClass={
+                  route.title.toLowerCase() === "daftar" &&
+                  "bg-green-base text-light-base"
+                }
+              >
                 {route.title}
               </NavigationLink>
             ))}
+            {isLoggedIn && (
+              <Link to="/profil">
+                <img
+                  className="ml-2 w-10 h-10 aspect-square object-cover rounded-full"
+                  src={currentUser?.photo ?? "/img/users/default.png"}
+                />
+              </Link>
+            )}
           </ul>
         </div>
       </div>

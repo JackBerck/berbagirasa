@@ -19,6 +19,7 @@ import DashboardProfile from "../pages/Dashboard";
 import DashboardManagePost from "../pages/Dashboard/ManagePost";
 import ErrorPage from "../pages/404";
 import UpdatePost from "../pages/Post/UpdatePost";
+import PostList from "../components/Post/PostList";
 
 function AppRoutes() {
   const { isLoggedIn } = useAuth();
@@ -34,7 +35,9 @@ function AppRoutes() {
           <Route path="/kontak" element={<ContactWrapper />} />
           <Route path="/donasi" element={<DonationWrapper />} />
           <Route path="/postingan">
-            <Route index=":id" element={<PostDetailWrapper />} />
+            <Route index element={<HomeWrapper />} />
+            <Route path=":id" element={<PostDetail />} />
+            <Route path="kategori/:category" element={<PostList/>}/>
             {isLoggedIn && (
               <Route path="tambah-postingan" element={<AddPostWrapper />} />
             )}
@@ -82,11 +85,6 @@ function RegisterWrapper() {
     document.title = "Daftar | BerbagiRasa";
   }, []);
   return <Register />;
-}
-
-function PostDetailWrapper() {
-  const { id } = useParams();
-  return <PostDetail postId={parseInt(id, 10)} />;
 }
 
 function AboutUsWrapper() {

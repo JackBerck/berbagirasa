@@ -59,7 +59,6 @@ export default function AddPostForm({ postId }) {
       return true;
     });
 
-    // Tambahkan file baru ke array yang sudah ada
     setPost((prevPost) => ({
       ...prevPost,
       images: [...prevPost.images, ...validFiles],
@@ -91,15 +90,15 @@ export default function AddPostForm({ postId }) {
       formData.append("description", post.description);
       formData.append("user_id", currentUser.id);
       formData.append("_method", "PUT");
+     
       post.images.forEach((image, index) => {
-        formData.append("images[]", image);
-        console.log(`Image ${index + 1}:`, image);
+        if (image instanceof File) {
+          formData.append("images[]", image);
+        }
       });
 
-      console.log("FormData:", formData);
-
       const response = await axios.post(
-        `http://localhost:8000/api/posts/${postId}/`,
+        `http://localhost:8000/api/posts/${postId}`,
         formData,
         {
           headers: {
@@ -109,10 +108,8 @@ export default function AddPostForm({ postId }) {
         }
       );
 
-      console.log("Response:", response.data);
       setSuccessMessage("Postingan berhasil diperbarui!");
     } catch (error) {
-      console.error("Error:", error.response?.data);
       setErrorMessage("Terjadi kesalahan.");
     }
   };
@@ -254,7 +251,9 @@ export default function AddPostForm({ postId }) {
               <button
                 type="button"
                 className="absolute -top-2 -right-2 bg-red-600 text-light-base p-1 rounded-full flex items-center justify-center shadow-md"
-                onClick={() => handleRemoveImage(index)}
+                onClick={() => {
+                  handleRemoveImage(index);
+                }}
               >
                 <svg
                   className="w-5 h-5"

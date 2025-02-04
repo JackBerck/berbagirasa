@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-export default function PostHeader({ title }) {
+export default function PostHeader({ title, category="" }) {
   return (
     <div className="flex justify-between items-center">
       <h1 className="big-font-size font-bold">{title}</h1>
       <Link
-        to="/postingan"
+        to={`/postingan/kategori/${category}`}
         className="text-blue-base underline flex items-center gap-1 small-font-size"
       >
         Lihat selengkapnya{" "}

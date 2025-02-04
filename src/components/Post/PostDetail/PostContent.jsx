@@ -1,8 +1,8 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, parseISO } from "date-fns";
 import { id } from "date-fns/locale";
 
 export default function PostContent({ post }) {
-  const formattedCreatedAt = formatDistanceToNow(new Date(post.createdAt), {
+  const formattedCreatedAt = formatDistanceToNow(parseISO(post.created_at), {
     addSuffix: true,
     locale: id,
   });
@@ -11,13 +11,11 @@ export default function PostContent({ post }) {
     <div className="container lg:max-w-screen-sm">
       <div className="flex items-center gap-2 border-b-2 border-b-gray-400 pb-2">
         <img
-          src={`${post.author.image ?? "profile.svg"}`}
-          alt={`${post.author.image ?? "user"} Profile Picture`}
+          src={`${post.author.photo ?? "/img/users/default.png"}`}
+          alt={`${post.author.name} Profile Photo`}
           className="rounded-full w-10 aspect-square"
         />
-        <p className="small-font-size font-semibold">
-          {post.author.username ?? "user"}
-        </p>
+        <p className="small-font-size font-semibold">{post.author.name}</p>
       </div>
       <div className="mb-2 mt-2">
         <h1 className="product-title-font-size font-bold">{post.title}</h1>
@@ -47,9 +45,9 @@ export default function PostContent({ post }) {
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">
             <h3 className="font-medium">Kategori</h3>
-            <p className="">{post.category}</p>
+            <p className="">{post.category.name}</p>
           </div>
-          <p className="extra-small-font-size">{post.content}</p>
+          <p className="extra-small-font-size">{post.description}</p>
           <div className="relative text-right w-full h-52 rounded-lg">
             <div className="overflow-hidden bg-none w-full h-full">
               <iframe
