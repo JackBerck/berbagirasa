@@ -1,4 +1,12 @@
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
+
 export default function WhatWeDo() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
   return (
     <section
       id="about-what-we-do"
@@ -8,20 +16,56 @@ export default function WhatWeDo() {
         <div className="flex flex-col-reverse lg:flex-row justify-between gap-4">
           <div className="w-full lg:w-1/2">
             <div className="grid grid-cols-2 gap-2 text-center">
-              <div className="bg-green-400 text-green-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold">
-                <h3 className="sub-title-font-size">150 K</h3>
+              <div
+                ref={ref}
+                className="bg-green-400 text-green-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold"
+              >
+                {inView && (
+                  <CountUp
+                    end={12768}
+                    duration={2}
+                    className="sub-title-font-size"
+                  />
+                )}
                 <p className="text-light-base">Orang Terbantu</p>
               </div>
-              <div className="bg-amber-400 text-amber-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold">
-                <h3 className="sub-title-font-size">10 K</h3>
+              <div
+                ref={ref}
+                className="bg-amber-400 text-amber-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold"
+              >
+                {inView && (
+                  <CountUp
+                    end={476}
+                    duration={2}
+                    className="sub-title-font-size"
+                  />
+                )}
                 <p className="text-light-base">Artikel Terbit</p>
               </div>
-              <div className="bg-blue-400 text-blue-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold">
-                <h3 className="sub-title-font-size">100 K</h3>
+              <div
+                ref={ref}
+                className="bg-blue-400 text-blue-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold"
+              >
+                {inView && (
+                  <CountUp
+                    end={87652}
+                    duration={2}
+                    className="sub-title-font-size"
+                  />
+                )}
                 <p className="text-light-base">Like Diterima</p>
               </div>
-              <div className="bg-purple-400 text-purple-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold">
-                <h3 className="sub-title-font-size">20 K</h3>
+              <div
+                ref={ref}
+                className="bg-purple-400 text-purple-700 flex items-center justify-center flex-col rounded-md p-8 font-semibold"
+              >
+                {inView && (
+                  <CountUp
+                    end={987}
+                    duration={2}
+                    className="sub-title-font-size"
+                  />
+                )}
                 <p className="text-light-base">Donasi Diterima</p>
               </div>
             </div>

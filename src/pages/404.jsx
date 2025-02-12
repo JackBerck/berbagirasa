@@ -5,7 +5,11 @@ export default () => {
     <section className="section-padding-x pt-24 pb-16 text-dark-base">
       <div className="container max-w-screen-xl">
         <div className="mx-auto max-w-screen-sm text-center">
-            <img src="/img/random/404.webp" alt="404 Animation" className="max-w-[296px] mx-auto" />
+          <img
+            src="/img/random/404.webp"
+            alt="404 Animation"
+            className="max-w-[296px] mx-auto"
+          />
           <h1 className="mb-2 tracking-tight font-extrabold title-font-size">
             404
           </h1>

@@ -19,15 +19,15 @@ export default function PostImages({ title, images }) {
       navigation
       pagination={{ clickable: true }}
       loop
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+      autoplay={{ delay: 5000, disableOnInteraction: false }}
     >
       {images.map((image, index) => (
         <SwiperSlide
           key={index}
           className="w-full h-full !flex !justify-center !items-center relative bg-no-repeat bg-cover bg-center cursor-pointer"
-          style={{ 
+          style={{
             backgroundImage: `url(${image})`,
-           }}
+          }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-50 z-10" />
           <img

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Loading from "../Loading";
 import PostCard from "../Card/PostCard";
 
 export default function PostList() {
@@ -10,7 +11,7 @@ export default function PostList() {
   const [loading, setLoading] = useState(true);
   const [categoryName, setCategoryName] = useState("");
 
-  if(category == 0) {
+  if (category == 0) {
     category = "";
   } else {
     category = `?category=${category}`;
@@ -47,6 +48,10 @@ export default function PostList() {
     const formatted = category.replace(/-/g, " ");
     return formatted.charAt(0).toUpperCase() + formatted.slice(1);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <section id="post-list" className="section-padding-x pt-24 pb-16">

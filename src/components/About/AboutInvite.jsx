@@ -11,10 +11,7 @@ export default function AboutInvite() {
             kami lakukan.
           </p>
           <div className="flex flex-col items-center gap-2 lg:gap-4 sm:flex-row sm:justify-center">
-            <a
-              href="#"
-              className="btn bg-amber-400 px-4 py-2 rounded-md"
-            >
+            <a href="#" className="btn bg-amber-400 px-4 py-2 rounded-md">
               Daftar Sekarang
             </a>
             <a

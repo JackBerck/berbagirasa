@@ -11,9 +11,18 @@ export default function AboutHero() {
         <div className="max-w-screen-sm  relative z-20">
           <h2 className="text-3xl font-bold mb-2">Tentang Kami</h2>
           <p className="text-gray-200 mb-4">
-            BerbagiRasa adalah platform yang memungkinkan kamu untuk berbagi makanan, minuman, dan kebutuhan sehari-hari atau barang lainnya kepada sesama yang membutuhkan. Kami percaya bahwa kebaikan akan selalu berlipat ganda, dan dengan berbagi, kita dapat membantu satu sama lain.
+            BerbagiRasa adalah platform yang memungkinkan kamu untuk berbagi
+            makanan, minuman, dan kebutuhan sehari-hari atau barang lainnya
+            kepada sesama yang membutuhkan. Kami percaya bahwa kebaikan akan
+            selalu berlipat ganda, dan dengan berbagi, kita dapat membantu satu
+            sama lain.
           </p>
-          <Link to="/masuk" className="px-4 py-2 bg-blue-base rounded-md font-semibold">Bergabung dengan kami</Link>
+          <Link
+            to="/masuk"
+            className="px-4 py-2 bg-blue-base rounded-md font-semibold"
+          >
+            Bergabung dengan kami
+          </Link>
         </div>
       </div>
     </section>

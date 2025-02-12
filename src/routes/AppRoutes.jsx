@@ -13,7 +13,6 @@ import Login from "../pages/Authentication/Login";
 import PostDetail from "../components/Post/PostDetail";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import Donation from "../pages/Donation";
 import AddPost from "../pages/Post/AddPost";
 import DashboardProfile from "../pages/Dashboard";
 import DashboardManagePost from "../pages/Dashboard/ManagePost";
@@ -33,7 +32,6 @@ function AppRoutes() {
           <Route path="/daftar" element={<RegisterWrapper />} />
           <Route path="/tentang-kami" element={<AboutUsWrapper />} />
           <Route path="/kontak" element={<ContactWrapper />} />
-          <Route path="/donasi" element={<DonationWrapper />} />
           <Route path="/postingan">
             <Route index element={<HomeWrapper />} />
             <Route path=":id" element={<PostDetail />} />
@@ -99,13 +97,6 @@ function ContactWrapper() {
     document.title = "Kontak | BerbagiRasa";
   }, []);
   return <Contact />;
-}
-
-function DonationWrapper() {
-  useEffect(() => {
-    document.title = "Donasi | BerbagiRasa";
-  }, []);
-  return <Donation />;
 }
 
 function AddPostWrapper() {

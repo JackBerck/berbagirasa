@@ -5,16 +5,16 @@ const navigationRoutes = (isLoggedIn) =>
       path: "/",
     },
     {
+      title: "Komunitas",
+      path: "/komunitas",
+    },
+    {
       title: "Tentang Kami",
       path: "/tentang-kami",
     },
     {
       title: "Kontak",
       path: "/kontak",
-    },
-    {
-      title: "Donasi",
-      path: "/donasi",
     },
     !isLoggedIn && {
       title: "Daftar",

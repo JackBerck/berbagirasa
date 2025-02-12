@@ -1,8 +1,8 @@
-export default function Donation() {
+export default function AboutDonation() {
   return (
     <section
       id="donation"
-      className="section-padding-x pt-24 pb-16 bg-[url('/img/random/motoran.jpg')] bg-cover bg-center relative text-light-base"
+      className="section-padding-x py-16 bg-[url('/img/random/motoran.jpg')] bg-cover bg-center relative text-light-base"
     >
       <div className="absolute bg-gradient-to-b from-dark-base to-dark-base/50 inset-0 opacity-70"></div>
       <div className="container max-w-screen-xl relative z-10">
@@ -18,8 +18,22 @@ export default function Donation() {
             </p>
           </div>
           <div className="w-full lg:w-1/2 bg-light-base text-dark-base p-4 rounded-md">
-            <p className="mb-2">Donasi yang Anda berikan juga sangat berarti bagi kami dalam membangun dan mengembangkan lebih lanjut tentang aplikasi berbasis website BerbagiRasa ini.</p>
-            <a className="flex items-center gap-2 bg-amber-200 w-fit rounded-md px-2 py-1 font-semibold" href="#"><img className="w-12" src="/img/icons/saweria.svg" alt="Saweria Logo" /> Donasi menggunakan Saweria</a>
+            <p className="mb-2">
+              Donasi yang Anda berikan juga sangat berarti bagi kami dalam
+              membangun dan mengembangkan lebih lanjut tentang aplikasi berbasis
+              website BerbagiRasa ini.
+            </p>
+            <a
+              className="flex items-center gap-2 bg-amber-200 w-fit rounded-md px-2 py-1 font-semibold"
+              href="#"
+            >
+              <img
+                className="w-12"
+                src="/img/icons/saweria.svg"
+                alt="Saweria Logo"
+              />{" "}
+              Donasi menggunakan Saweria
+            </a>
           </div>
         </div>
       </div>

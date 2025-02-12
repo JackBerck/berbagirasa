@@ -2,7 +2,7 @@ import UpdatePostForm from "../../components/Post/UpdatePost/UpdatePostForm";
 import { useParams } from "react-router-dom";
 
 export default function UpdatePost() {
-    const {id} = useParams();
+  const { id } = useParams();
 
   return (
     <main>

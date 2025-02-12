@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getCurrentUser } from "../../../api/user";
+import Loading from "../../Loading";
 
 export default function ManageProfile() {
   const [currentUser, setCurrentUser] = useState({});
@@ -12,6 +13,7 @@ export default function ManageProfile() {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const handleChangePassword = () => {
     setIsChangePassword(!isChangePassword);
@@ -21,6 +23,7 @@ export default function ManageProfile() {
     const fetchCurrentUser = async () => {
       const currentUserData = await getCurrentUser();
       setCurrentUser(currentUserData);
+      setLoading(false);
     };
 
     fetchCurrentUser();
@@ -77,7 +80,7 @@ export default function ManageProfile() {
         }
       );
 
-      window.location.reload()
+      window.location.reload();
       setSuccessMessage("Profil berhasil diperbarui!");
     } catch (error) {
       setErrorMessage(
@@ -86,6 +89,10 @@ export default function ManageProfile() {
       );
     }
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <form
@@ -143,7 +150,9 @@ export default function ManageProfile() {
           placeholder="Masukkan nama..."
           value={currentUser.name || ""}
           required
-          onChange={(e) => setCurrentUser({ ...currentUser, name: e.target.value })}
+          onChange={(e) =>
+            setCurrentUser({ ...currentUser, name: e.target.value })
+          }
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -170,7 +179,9 @@ export default function ManageProfile() {
           placeholder="Masukkan nomor telepon..."
           value={currentUser.phone || ""}
           readOnly
-          onChange={(e) => setCurrentUser({ ...currentUser, phone: e.target.value })}
+          onChange={(e) =>
+            setCurrentUser({ ...currentUser, phone: e.target.value })
+          }
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -182,7 +193,9 @@ export default function ManageProfile() {
           className="border border-gray-600 rounded-md px-3 py-2"
           placeholder="Masukkan alamat..."
           value={currentUser.address || ""}
-          onChange={(e) => setCurrentUser({ ...currentUser, address: e.target.value })}
+          onChange={(e) =>
+            setCurrentUser({ ...currentUser, address: e.target.value })
+          }
         />
       </div>
       <div className="flex flex-col gap-2">
@@ -194,7 +207,9 @@ export default function ManageProfile() {
           className="border border-gray-600 h-auto rounded-md px-3 py-2"
           placeholder="Masukkan bio..."
           value={currentUser.bio || ""}
-          onChange={(e) => setCurrentUser({ ...currentUser, bio: e.target.value })}
+          onChange={(e) =>
+            setCurrentUser({ ...currentUser, bio: e.target.value })
+          }
         />
       </div>
       <button

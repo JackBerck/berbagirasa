@@ -47,5 +47,5 @@
 }
 
 .extra-small-font-size {
-  @apply text-xs lg:text-sm;
+  @apply text-xs xl:text-sm;
 }

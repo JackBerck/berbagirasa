@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
-import Post from "../../components/Post/PostsList";
+import HomeHero from "../../components/Home/Hero/index";
 import AddPostButton from "../../components/Post/AddPost/AddPostButton";
+import Loading from "../../components/Loading";
+import Post from "../../components/Post/PostsList";
 import { getPosts } from "../../api/posts";
 
 export default function Home() {
@@ -13,6 +15,7 @@ export default function Home() {
   const [equipmentPosts, setEquipmentPosts] = useState([]);
   const [eventPosts, setEventPosts] = useState([]);
   const [otherPosts, setOtherPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchNewPosts = async () => {
@@ -57,20 +60,25 @@ export default function Home() {
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         .slice(0, 10);
       setOtherPosts(otherPosts);
+      setLoading(false);
     };
 
     fetchNewPosts();
   }, []);
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <main>
+      <HomeHero />
       <Post
         key="postingan-terbaru"
         id="postingan-terbaru"
         title="Terbaru"
         posts={newPosts}
         category="0"
-        addClass="pt-24"
       />
       <Post
         key="makanan-dan-minuman"
@@ -79,7 +87,13 @@ export default function Home() {
         category="1"
         posts={foodPosts}
       />
-      <Post key="pakaian" id="pakaian" title="Pakaian" category="2" posts={clothingPosts} />
+      <Post
+        key="pakaian"
+        id="pakaian"
+        title="Pakaian"
+        category="2"
+        posts={clothingPosts}
+      />
       <Post
         key="kendaraan"
         id="kendaraan"
@@ -101,7 +115,13 @@ export default function Home() {
         category="5"
         posts={eventPosts}
       />
-      <Post key="lain-lain" id="lain-lain" title="Lain Lain" category="6" posts={otherPosts} />
+      <Post
+        key="lain-lain"
+        id="lain-lain"
+        title="Lain Lain"
+        category="6"
+        posts={otherPosts}
+      />
       {isLoggedIn && <AddPostButton />}
     </main>
   );

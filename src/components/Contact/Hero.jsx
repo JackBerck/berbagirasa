@@ -43,7 +43,7 @@ export default function Hero() {
             </ul>
           </div>
           <div className="w-full lg:w-1/2">
-          <ContactForm />
+            <ContactForm />
           </div>
         </div>
       </div>

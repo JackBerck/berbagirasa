@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Aside from "../../components/Dashboard/Aside";
 import ManagePost from "../../components/Dashboard/ManagePost";
 import DeleteAlert from "../../components/Dashboard/ManagePost/DeleteAlert";
+import Loading from "../../components/Loading";
 import { getCurrentUser } from "../../api/user";
 import axios from "axios";
 
@@ -12,6 +13,7 @@ export default function DashboardManagePost() {
   const [currentUser, setCurrentUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -33,6 +35,8 @@ export default function DashboardManagePost() {
         setPosts(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         setErrorMessage("Gagal mengambil data postingan");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -57,7 +61,7 @@ export default function DashboardManagePost() {
       setPostIdToDelete(null);
       window.location.reload();
     } catch (error) {
-      setErrorMessage("Gagal menghapus postingan.")
+      setErrorMessage("Gagal menghapus postingan.");
     }
   };
 
@@ -65,6 +69,10 @@ export default function DashboardManagePost() {
     setShowConfirm(false);
     setPostIdToDelete(null);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <main>
@@ -74,11 +82,7 @@ export default function DashboardManagePost() {
       >
         <div className="container max-w-screen-xl">
           <div className="flex flex-col md:flex-row gap-8">
-          {
-            errorMessage && (
-              <p className="text-red-600">{errorMessage}</p>
-            )
-          }
+            {errorMessage && <p className="text-red-600">{errorMessage}</p>}
             <Aside />
             <ManagePost posts={posts} onDeleteClick={handleDeleteClick} />
           </div>

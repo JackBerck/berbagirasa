@@ -6,7 +6,7 @@ export default function PostCard({ post }) {
     <div className="flex flex-col bg-white shadow-md rounded-lg overflow-hidden">
       <Link to={`/postingan/${post.id}`}>
         <img
-          className="object-cover w-full max-h-48 rounded-lg mb-2"
+          className="object-cover w-full aspect-square max-h-48 rounded-lg mb-2"
           src={post.images[0]}
           alt={`${post.title} Image`}
         />

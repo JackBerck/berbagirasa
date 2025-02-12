@@ -4,6 +4,7 @@ import AboutPersuasive from "../../components/About/Persuasive";
 import AboutWhatWeDo from "../../components/About/WhatWeDo";
 import AboutInvite from "../../components/About/AboutInvite";
 import AboutComments from "../../components/About/AboutComments";
+import AboutDonation from "../../components/About/AboutDonation";
 
 export default function About() {
   return (
@@ -13,6 +14,7 @@ export default function About() {
       <AboutWhatWeDo />
       <AboutInvite />
       <AboutComments />
+      <AboutDonation />
     </main>
   );
 }
